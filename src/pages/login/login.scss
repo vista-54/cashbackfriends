@@ -1,0 +1,16 @@
+page-login {
+  h6{
+    color: $background_header;
+    font-weight: 400;
+  }
+  form{
+    border: 0.8px solid grey;
+  }
+  .item-block {
+    .item-inner {
+      padding-left: 16px;
+    }
+    padding-left: 0;
+  }
+
+}
