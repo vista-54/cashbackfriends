@@ -32,3 +32,5 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+/backup_propeller_prod/
+/www.zip

@@ -1,0 +1,32 @@
+page-catalog {
+  .searchbar-ios {
+    background: transparent;
+    padding: 0;
+  }
+  .badge-ios-secondary {
+    background: $background_header;
+    padding: 5px 10px;
+    margin: 7px 0;
+  }
+  h6 {
+    margin-top: 0;
+    color: $background_header;
+  }
+  ion-card-header {
+    display: flex;
+    .title {
+      width: 80%;
+    }
+    .percents {
+      width: 20%;
+    }
+  }
+  .card-ios {
+    margin: 0;
+    width: 100%;
+  }
+  ion-card {
+    margin-top: 10px !important;
+  }
+
+}

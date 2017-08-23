@@ -1,0 +1,14 @@
+page-invite {
+  text-align: center;
+  h4, h6 {
+    color: $background_header;
+  }
+  p {
+    text-align: left;
+    font-size: 20px;
+    color: $background_header;
+  }
+  .button-full-ios {
+    border-radius: 4px;
+  }
+}

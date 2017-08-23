@@ -14,17 +14,35 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 ion-header {
-  .toolbar-background{
+  .toolbar-background {
     background-color: $background_header;
   }
-  .toolbar-title{
-    color: rgb(255,255,255);
+  .toolbar-title {
+    color: rgb(255, 255, 255);
     text-transform: uppercase;
   }
 }
-ion-content{
-  background-color: $background_body!important;
+
+ion-content {
+  background-color: $background_body !important;
 }
-.item-block{
+
+.item-block {
   background-color: transparent;
+}
+
+.button-full, .button-full.activated {
+  background-color: $background_header;
+}
+
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+  color: rgb(255, 255, 255);
+}
+
+.tabs-ios .tab-button[aria-selected=true] .tab-button-icon {
+  color: $background_header;
+}
+.tabs-ios .tab-button:hover:not(.disable-hover), .tabs-ios .tab-button[aria-selected=true]{
+  color: $background_header;
+
 }

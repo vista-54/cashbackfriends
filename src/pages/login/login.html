@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-    <ion-navbar>
+    <ion-navbar hideBackButton>
         <ion-title>Вход</ion-title>
     </ion-navbar>
 
@@ -15,13 +15,15 @@
 
 <ion-content padding>
     <h6>На ваш телефон придет код для входа</h6>
-        <ion-item>
-            <ion-input [(ngModel)]="user.phone" placeholder="Ваш номер телефона" clearInput name="phone"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="isCodeShow">
-            <ion-input [(ngModel)]="user.code" placeholder="Код из смс" clearInput name="code"></ion-input>
-        </ion-item>
-    <button *ngIf="!isCodeShow" ion-button full (click)="sendCode()">Отправить код</button>
+    <ion-item>
+        <ion-input [(ngModel)]="user.phone" placeholder="+7 999 99999-99" type="tel" clearInput
+                   name="phone"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isCodeShow">
+        <!--*ngIf="isCodeShow"-->
+        <ion-input [(ngModel)]="user.code" placeholder="Код из смс" clearInput type="tel" name="code"></ion-input>
+    </ion-item>
+    <button [disabled]="!isLoginEnable" *ngIf="!isCodeShow" ion-button full (click)="sendCode()">Отправить код</button>
     <button *ngIf="isCodeShow" ion-button full (click)="login()">Продолжить</button>
 
 </ion-content>

@@ -1,0 +1,37 @@
+<!--
+  Generated template for the CatalogPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Каталог</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-searchbar placeholder="Поиск"   (ionInput)="onInput($event)"></ion-searchbar>
+    <ion-badge color="secondary">Окна</ion-badge>
+    <ion-badge color="secondary">Двери</ion-badge>
+    <ion-badge color="secondary">Тест</ion-badge>
+    <h6>Начните вводить запрос чтобы найти скидки в вашем городе.</h6>
+    <ion-card *ngFor="let card of catalog">
+        <ion-card-header>
+            <p class="title">{{card.name}}</p>
+            <p class="percent">{{card.public_percent}}% / {{card.percent}}%</p>
+        </ion-card-header>
+        <ion-card-content>
+            <p>{{card.products}}</p>
+            <p>{{card.address}}</p>
+            <p>{{card.phone}}</p>
+            <p>{{card.website}}</p>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

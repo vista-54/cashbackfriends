@@ -1,0 +1,30 @@
+<!--
+  Generated template for the InvitePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Пригласить</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <h4>Ваш промо-код</h4>
+    <h4>{{promo}}</h4>
+    <h6>Подари другу скидку и получай процент с его покупок</h6>
+    <button ion-button full (click)="share()">Пригласить контакт</button>
+    <p>Ваши друзья</p>
+    <ion-list>
+        <ion-item *ngFor="let friend of friends">
+            {{friend.first_name + friend.last_name}} {{friend.cash_total_savings}}
+        </ion-item>
+    </ion-list>
+</ion-content>

@@ -6,13 +6,37 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Register</ion-title>
-  </ion-navbar>
+    <ion-navbar hideBackButton>
+        <ion-title>Регистрация</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <h6>Для использования системы скидок у вас должен быть промо-код</h6>
+    <ion-item>
+        <ion-input ng-minlength="8" type="tel" ng-maxlength="8" [(ngModel)]="user.promo_code" placeholder="Промокод" clearInput name="code" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input minlength="3" [(ngModel)]="user.first_name" placeholder="Ваше имя" clearInput name="firstName"
+                   required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input minlength="3" [(ngModel)]="user.last_name" placeholder="Фамилия" clearInput name="secondName" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Пол</ion-label>
+        <ion-select [(ngModel)]="user.gender">
+            <ion-option value="m">Мужской</ion-option>
+            <ion-option value="f">Женский</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-input [(ngModel)]="user.city" placeholder="Фамилия" clearInput name="city" disabled="true"></ion-input>
+    </ion-item>
+
+
+    <button ion-button full (click)="registration()">Зарегестрироваться</button>
 
 </ion-content>

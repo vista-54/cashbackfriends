@@ -22,7 +22,7 @@ import {Storage} from "@ionic/storage";
 export class StartPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
-        storage.set('isSliderShown', true);
+        storage.set('isSliderShown', 'start');
     }
 
     ionViewDidLoad() {

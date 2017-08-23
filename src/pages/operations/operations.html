@@ -1,0 +1,26 @@
+<!--
+  Generated template for the OperationsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Операции</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <h4>Баланс</h4>
+    <h4>{{balance}}</h4>
+    <button ion-button full (click)="openPage('operations-setting')">Вывести CashBack</button>
+    <br>
+    <ion-list>
+        <ion-item *ngFor="let operation of operationsList">
+            {{operation.category + " "+ operation.username}}<span class="sum">{{operation.sum}}</span>
+        </ion-item>
+    </ion-list>
+</ion-content>

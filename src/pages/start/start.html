@@ -1,18 +1,17 @@
-<!--
-  Generated template for the StartPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Start</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-<button (click)="next()">Next</button>
+<ion-content class="page-start">
+    <ion-slides pager>
+        <ion-slide>
+            <img width="100%" alt="slide1" src="assets/img/slide1.svg">
+        </ion-slide>
+        <ion-slide>
+            <img width="100%" alt="slide2" src="assets/img/slide2.svg">
+        </ion-slide>
+        <ion-slide>
+            <img width="100%" alt="slide3" src="assets/img/slide3.svg">
+        </ion-slide>
+        <ion-slide class="slide4">
+            <img width="100%" alt="slide4" src="assets/img/slide4.svg">
+            <button ion-button full (click)="next()">Начать</button>
+        </ion-slide>
+    </ion-slides>
 </ion-content>

@@ -1,0 +1,33 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Меню</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item (click)="openPage('card')">
+        Моя карта
+      </button>
+      <button menuClose ion-item (click)="openPage('catalog')">
+        Каталог
+      </button>
+      <button menuClose ion-item (click)="openPage('invite')">
+        Пригласить друга
+      </button>
+      <button menuClose ion-item (click)="openPage('operations')">
+        Вывод средств
+      </button>
+      <button menuClose ion-item (click)="openPage('operations')">
+        Список операций
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+<ion-tabs #content>
+  <ion-tab [root]="tab1Root" tabTitle="Каталог" tabIcon="document"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Моя карта" tabIcon="card"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Пригласить" tabIcon="send"></ion-tab>
+</ion-tabs>
