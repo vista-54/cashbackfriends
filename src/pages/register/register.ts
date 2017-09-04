@@ -74,14 +74,19 @@ export class RegisterPage {
                             this.navCtrl.push('tabs');
                         },
                         err => {
-                            let error;
+                            let error, errors;
                             loader.dismiss();
                             try {
-                                let errors = JSON.parse(err._body);
-                                error = errors.non_field_errors[0];
+                                errors = JSON.parse(err._body);
                             } catch (e) {
                                 error = 'Ошибка сервера';
                             }
+                            try {
+                                error = errors.non_field_errors[0]
+                            } catch (e) {
+                                error = errors.errors;
+                            }
+
                             let alert = this.alertCtrl.create({
                                 title: 'Ошибка',
                                 subTitle: error,
