@@ -57,7 +57,7 @@ export class LoginPage {
                 buttons: ['OK']
             });
             alert.present();
-            this.isLoginEnable=true;
+            this.isLoginEnable = true;
             return false;
         }
         this.auth.code(this.user)
@@ -92,7 +92,11 @@ export class LoginPage {
                     if (data.token) {
                         loader.dismiss();
                         this.storage.set('token', data.token);
-                        this.navCtrl.push('register');
+                        if (data.is_registered) {
+                            this.navCtrl.push('tabs');
+                        } else {
+                            this.navCtrl.push('register');
+                        }
                     }
                 },
                 err => {
