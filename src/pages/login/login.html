@@ -23,7 +23,7 @@
         <!--*ngIf="isCodeShow"-->
         <ion-input [(ngModel)]="user.code" placeholder="Код из смс" clearInput type="tel" name="code"></ion-input>
     </ion-item>
-    <button [disabled]="!isLoginEnable" *ngIf="!isCodeShow" ion-button full (click)="sendCode()">Отправить код</button>
+    <button   ion-button full (click)="sendCode()">{{isLoginEnable?'Отправить код':'Отправить код повторно'}}</button>
     <button *ngIf="isCodeShow" ion-button full (click)="login()">Продолжить</button>
 
 </ion-content>
