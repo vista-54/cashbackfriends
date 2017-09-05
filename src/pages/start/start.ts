@@ -1,7 +1,6 @@
-import {Component} from "@angular/core";
-import {IonicPage, NavController, NavParams} from "ionic-angular";
+import {Component, ViewChild} from "@angular/core";
+import {IonicPage, NavController, NavParams, Slides} from "ionic-angular";
 import {Storage} from "@ionic/storage";
-
 
 /**
  * Generated class for the StartPage page.
@@ -21,13 +20,24 @@ import {Storage} from "@ionic/storage";
 })
 export class StartPage {
 
+    @ViewChild(Slides) slides: Slides;
+
     constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
         storage.set('isSliderShown', 'start');
+
     }
+
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad StartPage');
     }
+
+    autoSlide() {
+        let currentIndex = this.slides.getActiveIndex();
+        currentIndex++;
+        this.slides.slideTo(currentIndex);
+    }
+
 
     public next() {
         this.navCtrl.push('login');
