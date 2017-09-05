@@ -86,3 +86,53 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
+
+$open-sans-font-path: $font-path !default;
+
+@font-face {
+  font-family: "OpenSans";
+  font-style: normal;
+  font-weight: 300;
+  src: local("OpenSans Light"), local("OpenSans-Light"), url("#{$open-sans-font-path}/OpenSans-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "OpenSans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("OpenSans Regular"), local("OpenSans-Regular"), url("#{$open-sans-font-path}/OpenSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "OpenSans";
+  font-style: normal;
+  font-weight: 500;
+  src: local("OpenSans Semibold"), local("OpenSans-Semibold"),  url("#{$open-sans-font-path}/OpenSans-Semibold.ttf") format("truetype");
+}
+$arial-font-path: $font-path !default;
+
+@font-face {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Arial"), url("#{$open-sans-font-path}/arial.ttf") format("truetype");
+}
+// Roboto Font
+// Google
+// Apache License, version 2.0
+// http://www.apache.org/licenses/LICENSE-2.0.html
+
+$hlvetica-font-path: $font-path !default;
+
+@font-face {
+  font-family: "HelveticaNeueCyr-Roman";
+  font-style: normal;
+  font-weight: 300;
+  src: local("HelveticaNeueCyr-Roman"), url("#{$hlvetica-font-path}/HelveticaNeueCyr-Roman.otf");
+}
+
+
+
+

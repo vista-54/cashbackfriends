@@ -26,7 +26,9 @@ import {StatusBar} from "@ionic-native/status-bar";
 
 export class LoginPage {
 
-    public user = {};
+    public user = {
+        phone: '',
+    };
     public auth: any;
     public isCodeShow = false;
     public isLoginEnable = true;
@@ -45,8 +47,19 @@ export class LoginPage {
         console.log('ionViewDidLoad LoginPage');
     }
 
+
     public sendCode() {
         this.isLoginEnable = false;
+        if (this.user.phone.length !== 12) {
+            let alert = this.alertCtrl.create({
+                title: 'Ошибка',
+                subTitle: 'Поле телефона должно содержать 12 цифр',
+                buttons: ['OK']
+            });
+            alert.present();
+            this.isLoginEnable=true;
+            return false;
+        }
         this.auth.code(this.user)
             .subscribe(
                 data => {
