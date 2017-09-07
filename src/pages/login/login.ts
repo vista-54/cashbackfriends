@@ -47,7 +47,6 @@ export class LoginPage {
      * @returns {boolean}
      */
     public sendCode() {
-        this.isLoginEnable = false;
         if (this.user.phone.length !== 12) {
             this.message.show('Ошибка', 'Поле телефона должно содержать 12 цифр');
             return false;
@@ -56,6 +55,7 @@ export class LoginPage {
             this.message.show('Ошибка сети', 'Подключение отсуствует');
             return false;
         }
+        this.isLoginEnable = false;
         this.auth.code(this.user)
             .subscribe(
                 data => {
