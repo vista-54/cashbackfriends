@@ -12,17 +12,20 @@ export class Loader {
     }
 
     public show() {
-        this.loader = this.loadingCtrl.create({
-            content: "Пожалуйста, подождите...",
-        });
-        this.isShown=true;
-        this.loader.present();
+        if (!this.isShown) {
+            this.loader = this.loadingCtrl.create({
+                content: "Пожалуйста, подождите...",
+            });
+            this.isShown = true;
+            this.loader.present();
+        }
+
     }
 
     public hide() {
-        if(this.isShown){
+        if (this.isShown) {
             this.loader.dismiss();
-            this.isShown=false;
+            this.isShown = false;
         }
     }
 
