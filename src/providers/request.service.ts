@@ -6,8 +6,11 @@ import {Loader} from "./loader";
 @Injectable()
 
 export class RequestService {
-    // private loader: any;
-
+    /**
+     *
+     * @param {Http} http
+     * @param {Loader} loader
+     */
     constructor(private http: Http, private loader: Loader) {
     }
 
@@ -28,7 +31,20 @@ export class RequestService {
             )
     }
 
-    public get (url, credentials, options) {
+    /**
+     *
+     * @param url
+     * @param options
+     * @returns {Observable<any>}
+     */
+    public get (url, options) {
+        this.loader.show();
+        return this.http.get(url, options)
+            .map(response => {
+                    this.loader.hide();
+                    return response.json()
+                }
+            )
 
     }
 }
