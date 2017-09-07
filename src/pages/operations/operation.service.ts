@@ -7,11 +7,19 @@ import {Operation} from "./operation";
 export class OperationService {
     private currentUser;
 
-
+    /**
+     *
+     * @param user
+     */
     setCurrentUser(user) {
         this.currentUser = user;
     }
 
+    /**
+     *
+     * @param data
+     * @returns {Array}
+     */
     public transformOperationsArr(data) {
         let tmpArr = [];
         data.results.forEach(element => {
@@ -41,6 +49,12 @@ export class OperationService {
         return tmpArr;
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     * @returns {number}
+     */
     public sortByDate(a, b) {
         if (a.time < b.time)
             return 1;

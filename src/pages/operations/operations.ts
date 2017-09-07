@@ -3,7 +3,6 @@ import {NavController, NavParams} from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 import {OperationsSettingsPage} from "../operations-settings/operations-settings";
 import {UserService} from "../../providers/user.service";
-import {Response} from "@angular/http";
 import {OperationService} from "./operation.service";
 
 /**
@@ -23,7 +22,14 @@ export class OperationsPage {
     public operationsList = [];
     private currentUser;
 
-
+    /**
+     *
+     * @param {NavController} navCtrl
+     * @param {NavParams} navParams
+     * @param {Storage} storage
+     * @param {UserService} user
+     * @param {OperationService} model
+     */
     constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, user: UserService, model: OperationService) {
         this.storage.get('user').then(value => {
             this.currentUser = value;
@@ -31,18 +37,16 @@ export class OperationsPage {
             this.balance = this.currentUser.cash_balance;
         });
         user.getPurchases().then((val) => {
-            val.map((response: Response) => response.json())
-                .subscribe(data => {
-                    this.operationsList = this.operationsList.concat(model.transformOperationsArr(data));
-                    this.operationsList.sort(model.sortByDate)
-                })
+            val.subscribe(data => {
+                this.operationsList = this.operationsList.concat(model.transformOperationsArr(data));
+                this.operationsList.sort(model.sortByDate)
+            })
         });
         user.getWithdrawals().then((val) => {
-            val.map((response: Response) => response.json())
-                .subscribe(data => {
-                    this.operationsList = this.operationsList.concat(model.transformOperationsArr(data));
-                    this.operationsList.sort(model.sortByDate)
-                })
+            val.subscribe(data => {
+                this.operationsList = this.operationsList.concat(model.transformOperationsArr(data));
+                this.operationsList.sort(model.sortByDate)
+            })
         });
     }
 
@@ -51,9 +55,12 @@ export class OperationsPage {
         console.log('ionViewDidLoad OperationsPage');
     }
 
+    /**
+     *
+     * @param page
+     */
     public openPage(page) {
         switch (page) {
-
             case 'operations-setting':
                 this.navCtrl.push(OperationsSettingsPage);
                 break;
