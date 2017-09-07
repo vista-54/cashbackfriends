@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Headers, Http, Response} from "@angular/http";
+import {Headers, Http} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Storage} from "@ionic/storage";
 import {RequestService} from "./request.service";
@@ -8,9 +8,16 @@ import {URL} from "./url.constants"
 @Injectable()
 
 export class UserService {
+    private headers: Headers;
 
-
+    /**
+     *
+     * @param {Http} http
+     * @param {Storage} storage
+     * @param {RequestService} request
+     */
     constructor(private http: Http, public storage: Storage, private request: RequestService) {
+        this.headers = new Headers();
     }
 
     /**
@@ -40,7 +47,7 @@ export class UserService {
      * @returns {Observable<any>}
      */
     getToken(credentials) {
-        return this.request.post('https://app.cashbackfriends.online/clients/get_token', credentials)
+        return this.request.post(URL.login.token, credentials)
     }
 
     /**
@@ -50,56 +57,66 @@ export class UserService {
      */
     registration(credentials) {
         return this.storage.get('token').then((val) => {
-            let headers = new Headers();
-            this.createAuthorizationHeader(headers, val);
-            return this.request.post('https://app.cashbackfriends.online/clients/register', credentials, {headers: headers})
+            this.createAuthorizationHeader(this.headers, val);
+            return this.request.post(URL.register.registration, credentials, {headers: this.headers})
         })
     }
 
+    /**
+     *
+     */
     getInfo() {
         this.storage.get('token').then((val) => {
-            let headers = new Headers();
-            this.createAuthorizationHeader(headers, val);
-            this.http.get('http://app.cashbackfriends.online/clients/get_info', {headers: headers})
+            this.createAuthorizationHeader(this.headers, val);
+            this.request.get(URL.tabs.getInfo, {headers: this.headers})
                 .subscribe(data => {
                     this.storage.set('user', data);
-                    console.log(data);
                 })
         })
     }
 
+    /**
+     *
+     * @returns {Promise<Observable<any>>}
+     */
     getFriends() {
         return this.storage.get('token').then((val) => {
-            let headers = new Headers();
-            this.createAuthorizationHeader(headers, val);
-            return this.http.get('http://app.cashbackfriends.online/clients/get_friends', {headers: headers})
-                .map((response: Response) => response.json())
-
+            this.createAuthorizationHeader(this.headers, val);
+            return this.request.get(URL.invite.getFriends, {headers: this.headers})
         })
     }
 
+    /**
+     *
+     * @returns {Promise<Observable<any>>}
+     */
     getPurchases() {
         return this.storage.get('token').then((val) => {
-            let headers = new Headers();
-            this.createAuthorizationHeader(headers, val);
-            return this.http.get('http://app.cashbackfriends.online/clients/get_purchases', {headers: headers})
+            this.createAuthorizationHeader(this.headers, val);
+            return this.request.get(URL.card.getPurchases, {headers: this.headers})
 
         })
     }
 
+    /**
+     *
+     * @returns {Promise<Observable<Response>>}
+     */
     getWithdrawals() {
         return this.storage.get('token').then((val) => {
-            let headers = new Headers();
-            this.createAuthorizationHeader(headers, val);
-            return this.http.get('http://app.cashbackfriends.online/clients/withdrawals', {headers: headers})
+            this.createAuthorizationHeader(this.headers, val);
+            return this.request.get(URL.card.getWithdrawals, {headers: this.headers})
         })
     }
 
+    /**
+     *
+     * @returns {Promise<Observable<any>>}
+     */
     getCatalog() {
         return this.storage.get('token').then((val) => {
-            let headers = new Headers();
-            this.createAuthorizationHeader(headers, val);
-            return this.http.get('http://app.cashbackfriends.online/clients/get_city_catalog', {headers: headers})
+            this.createAuthorizationHeader(this.headers, val);
+            return this.request.get(URL.catalog.getCatalog, {headers: this.headers})
         })
     }
 
