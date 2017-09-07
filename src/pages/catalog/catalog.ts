@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {UserService} from "../../providers/user.service";
-import {Response} from "@angular/http";
 
 /**
  * Generated class for the CatalogPage page.
@@ -21,10 +20,9 @@ export class CatalogPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, user: UserService) {
         user.getCatalog().then((val) => {
-            val.map((response: Response) => response.json())
-                .subscribe(data => {
-                    this.catalog = data.results;
-                })
+            val.subscribe(data => {
+                this.catalog = data.results;
+            })
         });
     }
 

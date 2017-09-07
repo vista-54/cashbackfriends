@@ -34,15 +34,9 @@ export class TabsPage {
     constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private user: UserService) {
         storage.set('start_page', 'tabs');
         this.user.getInfo()
-        // .subscribe(data => {
-        //     localStorage.setItem('user', JSON.stringify(data));
-        //     console.log(data);
-        // })
     }
 
-    ngOnInit() {
 
-    }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad TabsPage');
