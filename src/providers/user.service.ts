@@ -66,12 +66,10 @@ export class UserService {
      *
      */
     getInfo() {
-        this.storage.get('token').then((val) => {
+        return this.storage.get('token').then((val) => {
             this.createAuthorizationHeader(this.headers, val);
-            this.request.get(URL.tabs.getInfo, {headers: this.headers})
-                .subscribe(data => {
-                    this.storage.set('user', data);
-                })
+            return this.request.get(URL.tabs.getInfo, {headers: this.headers})
+
         })
     }
 

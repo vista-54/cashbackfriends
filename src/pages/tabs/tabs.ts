@@ -6,6 +6,9 @@ import {InvitePage} from "../invite/invite";
 import {Storage} from "@ionic/storage";
 import {UserService} from "../../providers/user.service";
 import {OperationsPage} from "../operations/operations";
+import {Loader} from "../../providers/loader";
+import {Message} from "../../providers/message";
+import {Connect} from "../../providers/connect";
 
 /**
  * Generated class for the TabsPage page.
@@ -31,11 +34,19 @@ export class TabsPage {
     tab3Root = InvitePage;
 
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private user: UserService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private user: UserService, private loader: Loader, private message: Message, private connect: Connect) {
         storage.set('start_page', 'tabs');
-        this.user.getInfo()
+        this.user.getInfo().then(val => {
+            val.subscribe(data => {
+                this.storage.set('user', data);
+            }, err => {
+                loader.hide();
+                if (!this.connect.isConnected) {
+                    this.message.show('Ошибка сети', 'Подключение отсуствует');
+                }
+            })
+        })
     }
-
 
 
     ionViewDidLoad() {

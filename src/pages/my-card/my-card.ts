@@ -25,6 +25,12 @@ export class MyCardPage {
     public canvas: HTMLCanvasElement;
     public ctx: CanvasRenderingContext2D;
 
+    /**
+     *
+     * @param {NavController} navCtrl
+     * @param {NavParams} navParams
+     * @param {Storage} storage
+     */
     constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
         this.storage.get('user').then(value => {
             this.balance = value.cash_balance;

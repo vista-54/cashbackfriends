@@ -17,10 +17,10 @@
 
 
 <ion-content padding>
-    <ion-searchbar placeholder="Поиск"   (ionInput)="onInput($event)"></ion-searchbar>
-    <ion-badge color="secondary">Окна</ion-badge>
-    <ion-badge color="secondary">Двери</ion-badge>
-    <ion-badge color="secondary">Тест</ion-badge>
+    <ion-searchbar placeholder="Поиск" (ionInput)="onInput()" [(ngModel)]="searchQuery"></ion-searchbar>
+    <ion-badge color="secondary" (click)="setTag('Окна')">Окна</ion-badge>
+    <ion-badge color="secondary" (click)="setTag('Двери')">Двери</ion-badge>
+    <ion-badge color="secondary" (click)="setTag('Test')">Test</ion-badge>
     <h6>Начните вводить запрос чтобы найти скидки в вашем городе.</h6>
     <ion-card *ngFor="let card of catalog">
         <ion-card-header>
@@ -30,7 +30,7 @@
         <ion-card-content>
             <p>{{card.products}}</p>
             <!--<p>{{card.address}}</p>-->
-            <p>{{card.phone}}</p>
+            <p><a href="tel:{{card.phone}}">{{card.phone}}</a></p>
             <p>{{card.website}}</p>
         </ion-card-content>
     </ion-card>
