@@ -23,7 +23,7 @@ export class StartPage {
     @ViewChild(Slides) slides: Slides;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
-        storage.set('isSliderShown', 'start');
+        this.storage.set('isSliderShown', 'start');
 
     }
 
