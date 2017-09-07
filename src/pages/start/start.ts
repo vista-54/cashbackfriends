@@ -1,6 +1,7 @@
 import {Component, ViewChild} from "@angular/core";
 import {IonicPage, NavController, NavParams, Slides} from "ionic-angular";
 import {Storage} from "@ionic/storage";
+import {StatusBar} from "@ionic-native/status-bar";
 
 /**
  * Generated class for the StartPage page.
@@ -22,9 +23,9 @@ export class StartPage {
 
     @ViewChild(Slides) slides: Slides;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage,statusBar:StatusBar) {
         this.storage.set('isSliderShown', 'start');
-
+        statusBar.backgroundColorByHexString('#1E69FF');
     }
 
 

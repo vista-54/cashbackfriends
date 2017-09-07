@@ -11,15 +11,21 @@ export class MyApp {
 
     rootPage: string;
 
+    /**
+     *
+     * @param {Platform} platform
+     * @param {StatusBar} statusBar
+     * @param {SplashScreen} splashScreen
+     * @param {Storage} storage
+     */
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage) {
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             statusBar.overlaysWebView(false);
-            statusBar.backgroundColorByHexString('#1E69FF');
+            statusBar.backgroundColorByHexString('#5c45c3');
             splashScreen.hide();
         });
-
 
         storage.get('start_page').then((val) => {
             if (val) {
@@ -28,6 +34,7 @@ export class MyApp {
                 this.rootPage = 'start';
             }
         });
+
     }
 
 
