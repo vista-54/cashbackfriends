@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {IonicPage, NavController} from "ionic-angular";
+import {IonicPage, NavController, NavParams} from "ionic-angular";
 import {UserService} from "../../providers/user.service";
 import {Storage} from "@ionic/storage";
 import {MaskedInputDirective} from "angular2-text-mask";
@@ -30,7 +30,7 @@ export class LoginPage {
     public isLoginEnable = true;
     public isSendCodeEnable = true;
 
-    constructor(public navCtrl: NavController, private auth: UserService, private storage: Storage, public statusBar: StatusBar,
+    constructor(public navCtrl: NavController,public navParams: NavParams, private auth: UserService, private storage: Storage, public statusBar: StatusBar,
                 private message: Message, private connect: Connect, private loader: Loader) {
         storage.set('start_page', 'login');
         statusBar.backgroundColorByHexString('#5c45c3');

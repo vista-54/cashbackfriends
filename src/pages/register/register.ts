@@ -1,7 +1,10 @@
 import {Component} from "@angular/core";
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from "ionic-angular";
+import {IonicPage, NavController, NavParams} from "ionic-angular";
 import {UserService} from "../../providers/user.service";
 import {Storage} from "@ionic/storage";
+import {Loader} from "../../providers/loader";
+import {Message} from "../../providers/message";
+import {Connect} from "../../providers/connect";
 
 /**
  * Generated class for the RegisterPage page.
@@ -19,6 +22,7 @@ import {Storage} from "@ionic/storage";
     providers: [UserService]
 
 })
+
 export class RegisterPage {
 
     public user = {
@@ -27,9 +31,9 @@ export class RegisterPage {
         first_name: '',
         last_name: ''
     };
-    private error: string;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public auth: UserService, storage: Storage, private loadingCtrl: LoadingController, private alertCtrl: AlertController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public auth: UserService, storage: Storage,
+                private loader: Loader, private message: Message, private connect: Connect) {
         storage.set('start_page', 'register');
     }
 
@@ -39,73 +43,59 @@ export class RegisterPage {
 
     validation() {
         if (this.user.promo_code.length !== 8) {
-            this.error = 'Неверный промокод';
-            return false;
+            return 'Неверный промокод';
         }
         if (this.user.first_name.length === 0) {
-            this.error = 'Имя не может быть пустым';
-            return false;
+            return 'Имя не может быть пустым';
+
         }
         if (this.user.last_name.length === 0) {
-            this.error = 'Фамилия не может быть пустой';
-            return false;
+            return 'Фамилия не может быть пустой';
         }
-        return true;
+        return false;
     }
 
+    /**
+     *
+     * @returns {boolean}
+     */
     registration() {
         // this.navCtrl.push('tabs'); //for debug only
-        if (this.validation()) {
-            let loader = this.loadingCtrl.create({
-                content: "Пожалуйста, подождите...",
-            });
-            loader.present();
-            this.auth.registration(JSON.stringify(this.user))
-                .then((val) => {
-                    val.subscribe(
-                        data => {
-                            loader.dismiss();
-                            let alert = this.alertCtrl.create({
-                                title: 'Поздравляем!',
-                                subTitle: data.message,
-                                buttons: ['OK']
-                            });
-                            alert.present();
-                            this.navCtrl.push('tabs');
-                        },
-                        err => {
-                            let error, errors;
-                            loader.dismiss();
-                            try {
-                                errors = JSON.parse(err._body);
-                            } catch (e) {
-                                error = 'Ошибка сервера';
-                            }
-                            try {
-                                error = errors.non_field_errors[0]
-                            } catch (e) {
-                                error = errors.errors;
-                            }
-
-                            let alert = this.alertCtrl.create({
-                                title: 'Ошибка',
-                                subTitle: error,
-                                buttons: ['OK']
-                            });
-                            alert.present();
+        let validation = this.validation();
+        if (validation) {
+            this.message.show('Ошибка', validation);
+            return false;
+        }
+        if (!this.connect.isConnected) {
+            this.message.show('Ошибка сети', 'Подключение отсуствует');
+            return false;
+        }
+        this.auth.registration(JSON.stringify(this.user))
+            .then((val) => {
+                val.subscribe(
+                    data => {
+                        this.loader.hide();
+                        this.message.show('Поздравляем!', data.message);
+                        this.navCtrl.push('tabs');
+                    },
+                    err => {
+                        let error, errors;
+                        this.loader.hide();
+                        try {
+                            errors = JSON.parse(err._body);
+                        } catch (e) {
+                            error = 'Ошибка сервера';
                         }
-                    );
-                });
-
-        }
-        else {
-            let alert = this.alertCtrl.create({
-                title: 'Ошибка',
-                subTitle: this.error,
-                buttons: ['OK']
+                        try {
+                            error = errors.non_field_errors[0]
+                        } catch (e) {
+                            error = errors.errors;
+                        }
+                        this.message.show('Ошибка', error);
+                    }
+                );
             });
-            alert.present();
-        }
+
 
     }
 
